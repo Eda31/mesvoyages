@@ -7,6 +7,7 @@
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -15,13 +16,13 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @author Jadem
  */
-class AccueilController {
+class AccueilController extends AbstractController{
     /**
      * @Route("/", name="accueil")
      * @return Response
      */
     public function index(): Response{
-        return new response('Hello World !');
+        return $this->render("pages/accueil.html.twig");
         
     }
 }
