@@ -74,6 +74,18 @@ class VisiteRepository extends ServiceEntityRepository
         
         }
     }
+    /**
+     * Pour avoir les 2 derniers voyages
+     * @param int $limit
+     * @return type
+     */
+    public function findLatestVisites(int $limit) {
+        return $this->createQueryBuilder('v')
+        ->orderBy('v.datecreation', 'DESC')
+        ->setMaxResults($limit)
+        ->getQuery()
+        ->getResult();
+    }
 //    /**
 //     * @return Visite[] Returns an array of Visite objects
 //     */

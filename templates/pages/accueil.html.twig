@@ -1,6 +1,48 @@
 {% extends "basefront.html.twig" %}
 
 {% block body %}
-<h1>Page d'accueil</h1>
-<a href="{{ path('voyages') }}">voyages</a>
+<h1>Bienvenue sur mon site personnel de présentation de mes voyages.</h1>
+<p>
+    Dans la partie <a href="{{ path('voyages') }}">Voyages</a>, vous pouvez voir la liste des visites que j'ai faites dans différentes villes.</br>
+    A chaque fois j'ai précisé la ville visitée, le pays, j'ai mis une note (entre 0 et 20) et il y a aussi la daate de la visite.</br>
+    Vous pouvez trier la liste en fonction des villes, des pays, des notes et des dates, aussi bien dans l'ordre croissant que décroissant.</br>
+    Vous pouvez aussi filtrer les visites par rapport à une ville ou un pays.</br>
+    En cliquant sur la ville de la visite, vous pourrez avoir plus d'informations dessus :</br>
+    températures min et max, une description de la visite, les environnements(montage, mer, désert...) et une photo.</br>
+    Enfin, vous pouvez me contacter avec le formulaire de <a href="{{ path('contact') }}">Contact</a>.
+</p>
+<p>Voici mes 2 derniers voyages :</p>
+    <div class="row">
+        {% for voyage in derniersVoyages %}
+            <div class="col-md-6">
+                <div class="row mt-3">
+                    <div class="col">
+                        <h5>{{ voyage.datecreationstring }}</h5>
+                        <h1 class="text-primary mt-5">{{ voyage.ville }}</h1>
+                        <h3>{{ voyage.pays }}</h3>
+                        <h4>{{ voyage.note }}</h4>
+                        <h5 class="mt-5">t° entre {{ voyage.tempmin }}° et {{ voyage.tempmax }}°</h5>
+                        <p class="mt-5"><strong>Environnements :</strong></p>
+                        {% for environnement in voyage.environnements %}
+                            {{ environnement.nom }}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <!-- Emplacement photo -->
+                        image actuelle
+                        {% if voyage.imagename %}
+                            <img src="{{ app.request.getBasePath() ~ vich_uploader_asset(voyage, 'imageFile') }}" 
+                                class="card--img-top" style="width: 100%; height: auto;">
+                        {% else %}
+                            <p>(aucune image)</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+        
 {% endblock %}
