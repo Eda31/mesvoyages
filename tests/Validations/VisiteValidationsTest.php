@@ -46,4 +46,23 @@ class VisiteValidationsTest extends KernelTestCase{
                 ->setTempmax(18);
         $this->assertErrors($visite, 1, "min=20, max=18 devrait échouer");
     }
+    
+    public function testNonValidTempmaxVisite(){
+        $this->assertErrors($this->getVisite()->setTempmin(20)->setTempmax(18), 1, "min=20, max=18 devrait échouer");
+        $this->assertErrors($this->getVisite()->setTempmin(20)->setTempmax(20), 1, "min=20, max=20 devrait échouer");
+    }
+    
+    public function testValidDatecreationVisite(){ 
+        $aujourdhui = new \DateTime();
+        $this->assertErrors($this->getVisite()->setDatecreation($aujourdhui), 0, "aujourd'hui devrait réussir");
+        $plustot = (new \DateTime())->sub(new \DateInterval("P5D"));
+        $this->assertErrors($this->getVisite()->setDatecreation($plustot), 0, "plus tôt devrait réussir");
+    }
+    
+    public function testNonValidDatecreationVisite(){ 
+        $demain = (new \DateTime())->add(new \DateInterval("P1D"));
+        $this->assertErrors($this->getVisite()->setDatecreation($demain), 1, "demain devrait échouer");
+        $plustard = (new \DateTime())->add(new \DateInterval("P5D"));
+        $this->assertErrors($this->getVisite()->setDatecreation($plustard), 1, "plus tard devrait échouer");
+    }
 }
