@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Environnement;
 use App\Repository\VisiteRepository;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -43,6 +44,7 @@ class Visite
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Range(min = 0, max = 20)
      */
     private $note;
 
@@ -58,6 +60,7 @@ class Visite
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\GreaterThan(propertyPath="tempmin")
      */
     private $tempmax;
 
@@ -248,12 +251,7 @@ class Visite
      * @Assert\Callback
      * @param ExecutionContextInterface $context
      */
-    public function validate(ExecutionContextInterface$context) 
-    {
-        $context->buildViolation("message d'erreur")
-            ->atPath('nom_champ')
-            ->addViolation();
-        
+    public function validate(ExecutionContextInterface$context){
         $image = $this->getImageFile();
         if($image != null && $image != ""){
             $tailleImage = @getimagesize($image);
