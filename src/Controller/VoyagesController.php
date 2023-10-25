@@ -1,10 +1,5 @@
 <?php
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/PHPClass.php to edit this template
- */
-
 namespace App\Controller;
 
 use App\Repository\VisiteRepository;
@@ -70,8 +65,8 @@ class VoyagesController extends AbstractController{
             $visites = $this->repository->findByEqualValue($champ, $valeur);
             return $this->render("pages/voyages.html.twig", [
                 'visites' => $visites
-        ]);
-        }
+                    ]);
+            }
         return $this->redirectToRoute("voyages");
     }
     /**
