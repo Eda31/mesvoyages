@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\admin;
 
 use App\Entity\Contact;
 use App\Form\ContactType;
@@ -46,7 +46,7 @@ class ContactController extends AbstractController{
     public function sendEmail(MailerInterface $mailer, Contact $contact){
         $email = (new Email())
             ->from($contact->getEmail())
-            ->to('contact@mesvoyages.com')
+            ->to('jademarcaillou524@gmail.com')
             ->subject('Message du site de voyages')
             ->html($this->renderView(
                     'pages/_email.html.twig', [
