@@ -23,6 +23,7 @@
             image actuelle
             {% if visite.imagename %}
                 <img src="{{app.request.getBasePath()~vich_uploader_asset(visite, 'imageFile')}}" 
+                     alt="{{ 'Photo de la visite à'|trans }} {{ visite.ville }} - {{ visite.datecreationstring }}"
                     class="card--img-top" style="width: 100%;height: auto;">
             {% else %}
                 <p>(aucune image)</p>

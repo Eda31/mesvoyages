@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @author Jadem
  */
-class Contact 
+class Contact
 {
     /**
      * @var string|null
@@ -31,29 +31,35 @@ class Contact
      */
     private $message;
     
-    function getNom(): ?string {
+    public function getNom(): ?string
+    {
         return $this->nom;
     }
 
-    function getEmail(): ?string {
+    public function getEmail(): ?string
+    {
         return $this->email;
     }
 
-    function getMessage(): ?string {
+    public function getMessage(): ?string
+    {
         return $this->message;
     }
 
-    function setNom(?string $nom) {
+    public function setNom(?string $nom)
+    {
         $this->nom = $nom;
         return $this;
     }
 
-    function setEmail(?string $email) {
+    public function setEmail(?string $email)
+    {
         $this->email = $email;
         return $this;
     }
 
-    function setMessage(?string $message) {
+    public function setMessage(?string $message)
+    {
         $this->message = $message;
         return $this;
     }

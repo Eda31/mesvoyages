@@ -16,17 +16,19 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @author Jadem
  */
-class ContactController extends AbstractController{
+class ContactController extends AbstractController
+{
     /**
      * @Route("/contact", name="contact")
      * @return Response
      */
-    public function index(Request $request, MailerInterface $mailer): Response{
+    public function index(Request $request, MailerInterface $mailer): Response
+    {
         $contact = new Contact();
         $formContact = $this->createForm(ContactType::class, $contact);
         $formContact->handleRequest($request);
         
-        if($formContact->isSubmitted() && $formContact->isValid()){
+        if ($formContact->isSubmitted() && $formContact->isValid()) {
             //envoi du mail
             $this->sendEmail($mailer, $contact);
             $this->addFlash('succes', 'message envoyé');
@@ -43,19 +45,21 @@ class ContactController extends AbstractController{
      * @param MailerInterface $mailer
      * @param Contact $contact
      */
-    public function sendEmail(MailerInterface $mailer, Contact $contact){
+    public function sendEmail(MailerInterface $mailer, Contact $contact)
+    {
         $email = (new Email())
             ->from($contact->getEmail())
-            ->to('jademarcaillou524@gmail.com')
+            ->to('jademarcaillou524@gmail.com')//adresse mail effacé
             ->subject('Message du site de voyages')
-            ->html($this->renderView(
-                    'pages/_email.html.twig', [
+            ->html(
+                $this->renderView(
+                    'pages/_email.html.twig',
+                    [
                         'contact' => $contact
                     ]
-            ),
-            'utf-8'
-        )
-    ;
-    $mailer->send($email);
+                ),
+                'utf-8'
+            );
+        $mailer->send($email);
     }
 }

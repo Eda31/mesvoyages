@@ -13,18 +13,22 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @author Jadem
  */
-class VoyagesController extends AbstractController{
+class VoyagesController extends AbstractController
+{
     /**
-     * 
+     * Constante pour le chemin du modèle
+     */
+    private const VOYAGES_TEMPLATE = "pages/voyages.html.twig";
+    /**
      * @var VisiteRepository
      */
     private $repository;
 
     /**
-     * 
      * @param VisiteRepository $repository
      */
-    public function __construct(VisiteRepository $repository){
+    public function __construct(VisiteRepository $repository)
+    {
         $this->repository = $repository;
         
     }
@@ -33,9 +37,10 @@ class VoyagesController extends AbstractController{
      * @Route("/voyages", name="voyages")
      * @return Response
      */
-    public function index(): Response{
-        $visites = $this->repository->findAllOrderBy('datecreation','DESC');
-        return $this->render("pages/voyages.html.twig", [
+    public function index(): Response
+    {
+        $visites = $this->repository->findAllOrderBy('datecreation', 'DESC');
+        return $this->render(self::VOYAGES_TEMPLATE, [
             'visites' => $visites
         ]);
 
@@ -46,9 +51,10 @@ class VoyagesController extends AbstractController{
      * @param type $ordre
      * @return Response
      */
-    public function sort($champ, $ordre): Response{
+    public function sort($champ, $ordre): Response
+    {
         $visites = $this->repository->findAllOrderBy($champ, $ordre);
-        return $this->render("pages/voyages.html.twig", [
+        return $this->render(self::VOYAGES_TEMPLATE, [
             'visites' => $visites
         ]);
         
@@ -59,11 +65,12 @@ class VoyagesController extends AbstractController{
      * @param Resquest $request
      * @return Response
      */
-    public function findAllEqual($champ, Request $request): Response{
-        if($this->isCsrfTokenValid('filtre_'.$champ, $request->get('_token'))){
+    public function findAllEqual($champ, Request $request): Response
+    {
+        if ($this->isCsrfTokenValid('filtre_'.$champ, $request->get('_token'))) {
             $valeur = $request->get("recherche");
             $visites = $this->repository->findByEqualValue($champ, $valeur);
-            return $this->render("pages/voyages.html.twig", [
+            return $this->render(self::VOYAGES_TEMPLATE, [
                 'visites' => $visites
                     ]);
             }
@@ -74,7 +81,8 @@ class VoyagesController extends AbstractController{
      * @param type $id
      * @return Response
      */
-    public function showOne($id): Response{
+    public function showOne($id): Response
+    {
         $visite = $this->repository->find($id);
         return $this->render("pages/voyage.html.twig", [
             'visite' => $visite

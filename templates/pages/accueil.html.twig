@@ -34,7 +34,8 @@
                         image actuelle
                         {% if voyage.imagename %}
                             <img src="{{ app.request.getBasePath() ~ vich_uploader_asset(voyage, 'imageFile') }}" 
-                                class="card--img-top" style="width: 100%; height: auto;">
+                                 alt="{{ 'Image de voyage'|trans }}"
+                                 class="card--img-top" style="width: 100%; height: auto;">
                         {% else %}
                             <p>(aucune image)</p>
                         {% endif %}

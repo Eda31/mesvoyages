@@ -17,7 +17,8 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @author Jadem
  */
-class AccueilController extends AbstractController{
+class AccueilController extends AbstractController
+{
     /**
      * @Route("/", name="accueil")
      * @return Response

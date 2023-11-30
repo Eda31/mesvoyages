@@ -11,15 +11,17 @@ use Symfony\Component\HttpFoundation\Response;
  * @author Jadem
  */
 class VoyagesControllerTest extends WebTestCase{
+    private const VOYAGES_PATH = '/voyages';
+    
     public function testAccesPage(){
         $client = static::createClient();
-        $client->request('GET', '/voyages');
+        $client->request('GET', self::VOYAGES_PATH);
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
     }
     
     public function testContenuPage(){
         $client = static::createClient();
-        $crawler = $client->request('GET', '/voyages');
+        $crawler = $client->request('GET', self::VOYAGES_PATH);
         $this->assertSelectorTextContains('h1', 'Mes voyages');
         $this->assertSelectorTextContains('th', 'Ville');
         $this->assertCount(4, $crawler->filter('th'));
@@ -28,7 +30,7 @@ class VoyagesControllerTest extends WebTestCase{
     
     public function testLinkVille(){
         $client = static::createClient();
-        $client->request('GET', '/voyages');
+        $client->request('GET', self::VOYAGES_PATH);
         // clic sur un lien (le nom d'une ville)
         $client->clickLink('Revel');
         // récupération du résultat du clic
