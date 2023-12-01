@@ -23,11 +23,17 @@ class LoginController extends AbstractController
             'error'         => $error
         ]);
     }
-    
     /**
      * @Route("/logout", name="logout")
      */
-    public function logout(){
-        
+    public function logout()
+    {
+        // Cette méthode ne nécessite pas de code spécifique,
+        // car la déconnexion est gérée par le système de sécurité Symfony.
+        // Symfony interceptera automatiquement les requêtes vers /logout et déconnectera l'utilisateur.
+
+        // Vous pouvez personnaliser le comportement de déconnexion dans le fichier security.yaml.
+        // Pour cela, vous pouvez définir des paramètres comme la redirection après déconnexion, etc.
+        // Consultez la documentation Symfony pour plus d'informations sur la
     }
 }

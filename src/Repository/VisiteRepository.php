@@ -44,7 +44,8 @@ class VisiteRepository extends ServiceEntityRepository
      * @param type $ordre
      * @return Visite[]
      */
-    public function findAllOrderBy($champ, $ordre): array{
+    public function findAllOrderBy(string $champ, string $ordre) : array
+    {
         return $this->createQueryBuilder('v')
                 ->orderBy('v.'.$champ, $ordre)
                 ->getQuery()
@@ -57,8 +58,9 @@ class VisiteRepository extends ServiceEntityRepository
      * @param type $valeur
      * @return Visite[]
      */
-    public function findByEqualValue($champ, $valeur) : array {
-        if($valeur==""){
+    public function findByEqualValue($champ, $valeur) : array
+    {
+        if ($valeur=="") {
             return $this->createQueryBuilder('v') //allias de la table
                     ->orderBy('v.'.$champ, 'ASC')
                     ->getQuery()
@@ -78,7 +80,8 @@ class VisiteRepository extends ServiceEntityRepository
      * @param int $limit
      * @return type
      */
-    public function findLatestVisites(int $limit) {
+    public function findLatestVisites(int $limit)
+    {
         return $this->createQueryBuilder('v')
         ->orderBy('v.datecreation', 'DESC')
         ->setMaxResults($limit)

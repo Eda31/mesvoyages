@@ -10,16 +10,17 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @author Jadem
  */
-class VoyagesControllerTest extends WebTestCase{
+class VoyagesControllerTest extends WebTestCase
+{
     private const VOYAGES_PATH = '/voyages';
-    
-    public function testAccesPage(){
+    public function testAccesPage()
+    {
         $client = static::createClient();
         $client->request('GET', self::VOYAGES_PATH);
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
     }
-    
-    public function testContenuPage(){
+    public function testContenuPage()
+    {
         $client = static::createClient();
         $crawler = $client->request('GET', self::VOYAGES_PATH);
         $this->assertSelectorTextContains('h1', 'Mes voyages');
@@ -27,8 +28,8 @@ class VoyagesControllerTest extends WebTestCase{
         $this->assertCount(4, $crawler->filter('th'));
         $this->assertSelectorTextContains('h5', 'Revel');
     }
-    
-    public function testLinkVille(){
+    public function testLinkVille()
+    {
         $client = static::createClient();
         $client->request('GET', self::VOYAGES_PATH);
         // clic sur un lien (le nom d'une ville)
@@ -42,8 +43,8 @@ class VoyagesControllerTest extends WebTestCase{
         $uri = $client->getRequest()->server->get("REQUEST_URI");
         $this->assertEquals('/voyages/voyage/101', $uri);
     }
-    
-    public function testFiltreVille(){
+    public function testFiltreVille()
+    {
         $client = static::createClient();
         $client->request('GET', '/voyages');
         // simulation de la soumission du formulaire

@@ -11,14 +11,17 @@ use PHPUnit\Framework\TestCase;
  *
  * @author Jadem
  */
-class VisiteTest extends TestCase {
-    public function testGetDatecreationString() {
+class VisiteTest extends TestCase
+{
+    public function testGetDatecreationString()
+    {
         $visite = new Visite();
         $visite->setDatecreation(new DateTime("2022-04-14"));
         $this->assertEquals("14/04/2022", $visite->getDatecreationString());
     }
         
-    public function testAddEnvironnement(){
+    public function testAddEnvironnement()
+    {
         $environnement = new Environnement();
         $environnement->setNom("montagne");
         $visite = new Visite();

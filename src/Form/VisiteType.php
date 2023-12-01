@@ -24,7 +24,7 @@ class VisiteType extends AbstractType
             ->add('datecreation', DateType::class, [
                 'widget' => 'single_text',
                 'data' => isset($options['data']) &&
-                    $options['data']->getDateCreation() != null ? 
+                    $options['data']->getDateCreation() != null?
                     $options['data']->getDateCreation() : new DateTime('now'),
                 'label' => 'Date'
             ])
@@ -61,6 +61,7 @@ class VisiteType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Visite::class,
+            'csrf_protection' => false,
         ]);
     }
 }

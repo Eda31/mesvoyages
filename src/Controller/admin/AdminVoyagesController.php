@@ -20,19 +20,19 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @author Jadem
  */
-class AdminVoyagesController extends AbstractController{
+class AdminVoyagesController extends AbstractController
+{
     
     /**
-     * 
      * @var VisiteRepository
      */
     private $repository;
 
     /**
-     * 
      * @param VisiteRepository $repository
      */
-    public function __construct(VisiteRepository $repository){
+    public function __construct(VisiteRepository $repository)
+    {
         $this->repository = $repository;
         
     }
@@ -41,8 +41,9 @@ class AdminVoyagesController extends AbstractController{
      * @Route("/admin", name="admin.voyages")
      * @return Response
      */
-    public function index(): Response{
-        $visites = $this->repository->findAllOrderBy('datecreation','DESC');
+    public function index(): Response
+    {
+        $visites = $this->repository->findAllOrderBy('datecreation', 'DESC');
         return $this->render("admin/admin.voyages.html.twig", [
             'visites' => $visites
         ]);
@@ -53,7 +54,8 @@ class AdminVoyagesController extends AbstractController{
      * @param int $id
      * @return Response
      */
-    public function suppr(int $id): Response{
+    public function suppr(int $id): Response
+    {
         $visite = $this->repository->find($id);
         $this->repository->remove($visite, true);
         return $this->redirectToRoute('admin.voyages');
@@ -63,12 +65,13 @@ class AdminVoyagesController extends AbstractController{
      * @param int $id
      * @return Response
      */
-    public function edit(int $id, Request $request): Response{
+    public function edit(int $id, Request $request): Response
+    {
         $visite = $this->repository->find($id);
         $formVisite = $this->createForm(VisiteType::class, $visite);
         
         $formVisite->handleRequest($request);
-        if ($formVisite->isSubmitted() && $formVisite->isValid()){
+        if ($formVisite->isSubmitted() && $formVisite->isValid()) {
             $this->repository->add($visite, true);
             return $this->redirectToRoute('admin.voyages');
         }
@@ -82,12 +85,13 @@ class AdminVoyagesController extends AbstractController{
      * @param Request $request
      * @return Response
      */
-    public function ajout(Request $request): Response{
+    public function ajout(Request $request): Response
+    {
         $visite = new Visite();
         $formVisite = $this->createForm(VisiteType::class, $visite);
-        
-        $formVisite->handleRequest($request);
-        if ($formVisite->isSubmitted() && $formVisite->isValid()){
+        $formVisite->handleRequest($request);        
+
+        if ($formVisite->isSubmitted() && $formVisite->isValid()) {
             $this->repository->add($visite, true);
             return $this->redirectToRoute('admin.voyages');
         }

@@ -14,23 +14,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 /**
  * Description of AdminEnvironnementController
- *
  * @author Jadem
  */
-class AdminEnvironnementController extends AbstractController{
+class AdminEnvironnementController extends AbstractController
+{
     /**
-     * 
      * @var VisiteRepository
      */
     private $repository;
 
     /**
-     * 
      * @param EnvironnementRepository $repository
      */
-    public function __construct(EnvironnementRepository $repository){
+    public function __construct(EnvironnementRepository $repository)
+    {
         $this->repository = $repository;
         
     }
@@ -39,7 +39,8 @@ class AdminEnvironnementController extends AbstractController{
      * @Route("/admin/environnements", name="admin.environnements")
      * @return Response
      */
-    public function index(): Response{
+    public function index(): Response
+    {
         $environnements = $this->repository->findAll();
         return $this->render("admin/admin.environnements.html.twig", [
             'environnements' => $environnements
@@ -51,19 +52,21 @@ class AdminEnvironnementController extends AbstractController{
      * @param Request $request
      * @return Response
      */
-    public function ajout(Request $request): Response{
+    public function ajout(Request $request): Response
+    {
         $nomEnvironnement = $request->get("nom");
         $environnement = new Environnement();
         $environnement->setNom($nomEnvironnement);
         $this->repository->add($environnement, true);
-        return $this->redirectToRoute('admin.environnements');        
+        return $this->redirectToRoute('admin.environnements');
     }
     /**
      * @Route("/admin/suppr/{id}", name="admin.environnement.suppr")
      * @param int $id
      * @return Response
      */
-    public function suppr(int $id): Response{
+    public function suppr(int $id): Response
+    {
         $environnement = $this->repository->find($id);
         $this->repository->remove($environnement, true);
         return $this->redirectToRoute('admin.environnements');
