@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form;
+namespace App\src\Form;
 
 use App\Entity\Environnement;
 use App\Entity\Visite;
@@ -57,7 +57,7 @@ class VisiteType extends AbstractType
         ;
     }
     
-    public function configureOptions(OptionsResolver $resolver): void
+    protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Visite::class,

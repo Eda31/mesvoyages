@@ -89,7 +89,7 @@ class AdminVoyagesController extends AbstractController
     {
         $visite = new Visite();
         $formVisite = $this->createForm(VisiteType::class, $visite);
-        $formVisite->handleRequest($request);        
+        $formVisite->handleRequest($request);
 
         if ($formVisite->isSubmitted() && $formVisite->isValid()) {
             $this->repository->add($visite, true);
